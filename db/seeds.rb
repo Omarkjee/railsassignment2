@@ -1,4 +1,4 @@
-Movie.destroy_all
+
 
 # Seed the RottenPotatoes DB with some movies.
 more_movies = [
