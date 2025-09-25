@@ -14,20 +14,20 @@
  *= require_self
  */
 
- /* Movies table styling */
-
-
 /* General body and header styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   color: #333;
   margin: 20px;
+  line-height: 1.6;
 }
 
 h1 {
   color: #333;
   margin-bottom: 20px;
+  border-bottom: 2px solid #0066cc;
+  padding-bottom: 10px;
 }
 
 /* Movies table styling */
@@ -36,79 +36,116 @@ table {
   border-collapse: collapse;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
 }
 
 th, td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 12px 15px;
   text-align: left;
 }
 
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
 /* Sortable column headers */
-th.sortable {
-  cursor: pointer;
+th {
   position: relative;
+  padding-right: 25px;
+  cursor: pointer;
   user-select: none;
   transition: background-color 0.3s;
 }
 
-th.asc {
-  background-color: #d0f0c0;
+th a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding-right: 15px;
 }
 
-th.desc {
-  background-color: #f0d0c0;
+th a:hover {
+  color: #0066cc;
 }
 
-th::after {
-  content: " ";
-  padding-left: 5px;
+.sort-indicator {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  color: #0066cc;
 }
 
-th.asc::after {
-  content: "▲";
+/* Sorting state styles */
+th.sorted-asc {
+  background-color: #e0f0ff;
 }
 
-th.desc::after {
-  content: "▼";
+th.sorted-desc {
+  background-color: #f0e0ff;
 }
 
 /* Zebra stripes for table rows */
 tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
 }
 
 /* Hover effect for table rows */
 tbody tr:hover {
-  background-color: #e0e0e0;
+  background-color: #f0f8ff;
+  transition: background-color 0.2s;
 }
 
 /* Action links styling */
 td a {
   text-decoration: none;
   color: #0066cc;
-  margin-right: 5px;
+  margin-right: 10px;
   font-weight: bold;
+  padding: 3px 6px;
+  border-radius: 3px;
+  transition: all 0.2s;
 }
 
 td a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  background-color: #0066cc;
+  color: white;
+}
+
+/* Separator between action links */
+td a:not(:last-child)::after {
+  content: "|";
+  margin-left: 10px;
+  color: #ccc;
+}
+
+td a:last-child {
+  margin-right: 0;
 }
 
 /* New Movie button styling */
 .button {
   display: inline-block;
-  padding: 8px 15px;
+  padding: 10px 20px;
   margin-top: 10px;
   background-color: #0066cc;
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .button:hover {
   background-color: #004999;
+  text-decoration: none;
+  color: white;
 }
 
 /* Table footer styling */
@@ -116,5 +153,92 @@ tfoot td {
   font-weight: bold;
   background-color: #f7f7f7;
   text-align: left;
-  padding: 10px;
+  padding: 15px;
+}
+
+/* Flash messages styling */
+.flash {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.flash.notice {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.flash.alert {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+/* Form styling (for new/edit pages) */
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.field input[type="text"],
+.field input[type="date"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+  
+  table {
+    font-size: 14px;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+  }
+  
+  td a {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  td a:not(:last-child)::after {
+    content: "";
+    margin-left: 0;
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }

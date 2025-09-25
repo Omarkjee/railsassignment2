@@ -3,20 +3,26 @@
 <table>
   <thead>
     <tr>
-      <%# Sortable headers %>
-      <th class="sortable <%= 'asc' if sort_column == 'title' && sort_direction == 'asc' %> <%= 'desc' if sort_column == 'title' && sort_direction == 'desc' %>" 
-          aria-sort="<%= sort_column == 'title' ? sort_direction : 'none' %>">
-        <%= link_to "Title", movies_path(sort: "title", direction: sort_column == "title" && sort_direction == "asc" ? "desc" : "asc") %>
+      <%# Sortable headers with proper toggle logic %>
+      <th class="<%= 'sorted-' + sort_direction if sort_column == 'title' %>">
+        <%= link_to "Title", movies_path(sort: 'title', direction: (sort_column == 'title' && sort_direction == 'asc') ? 'desc' : 'asc') %>
+        <% if sort_column == 'title' %>
+          <span class="sort-indicator"><%= sort_direction == 'asc' ? '↑' : '↓' %></span>
+        <% end %>
       </th>
 
-      <th class="sortable <%= 'asc' if sort_column == 'rating' && sort_direction == 'asc' %> <%= 'desc' if sort_column == 'rating' && sort_direction == 'desc' %>" 
-          aria-sort="<%= sort_column == 'rating' ? sort_direction : 'none' %>">
-        <%= link_to "Rating", movies_path(sort: "rating", direction: sort_column == "rating" && sort_direction == "asc" ? "desc" : "asc") %>
+      <th class="<%= 'sorted-' + sort_direction if sort_column == 'rating' %>">
+        <%= link_to "Rating", movies_path(sort: 'rating', direction: (sort_column == 'rating' && sort_direction == 'asc') ? 'desc' : 'asc') %>
+        <% if sort_column == 'rating' %>
+          <span class="sort-indicator"><%= sort_direction == 'asc' ? '↑' : '↓' %></span>
+        <% end %>
       </th>
 
-      <th class="sortable <%= 'asc' if sort_column == 'release_date' && sort_direction == 'asc' %> <%= 'desc' if sort_column == 'release_date' && sort_direction == 'desc' %>" 
-          aria-sort="<%= sort_column == 'release_date' ? sort_direction : 'none' %>">
-        <%= link_to "Release Date", movies_path(sort: "release_date", direction: sort_column == "release_date" && sort_direction == "asc" ? "desc" : "asc") %>
+      <th class="<%= 'sorted-' + sort_direction if sort_column == 'release_date' %>">
+        <%= link_to "Release Date", movies_path(sort: 'release_date', direction: (sort_column == 'release_date' && sort_direction == 'asc') ? 'desc' : 'asc') %>
+        <% if sort_column == 'release_date' %>
+          <span class="sort-indicator"><%= sort_direction == 'asc' ? '↑' : '↓' %></span>
+        <% end %>
       </th>
 
       <th>Actions</th>
@@ -30,9 +36,9 @@
         <td><%= movie.rating %></td>
         <td><%= movie.release_date.strftime("%d-%b-%Y") if movie.release_date %></td>
         <td>
-          <%= link_to 'Show', movie_path(movie, sort: sort_column, direction: sort_direction) %> |
-          <%= link_to 'Edit', edit_movie_path(movie, sort: sort_column, direction: sort_direction) %> |
-          <%= link_to 'Destroy', movie_path(movie, sort: sort_column, direction: sort_direction), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Show', movie %>
+          <%= link_to 'Edit', edit_movie_path(movie) %>
+          <%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
@@ -45,4 +51,4 @@
   </tfoot>
 </table>
 
-<%= link_to 'New Movie', new_movie_path(sort: sort_column, direction: sort_direction), class: "button" %>
+<%= link_to 'New Movie', new_movie_path, class: "button" %>
