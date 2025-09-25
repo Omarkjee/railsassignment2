@@ -15,10 +15,41 @@
  */
 
  /* Movies table styling */
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* General body and header styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 20px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Movies table styling */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 th, td {
@@ -27,8 +58,12 @@ th, td {
   text-align: left;
 }
 
+/* Sortable column headers */
 th.sortable {
   cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: background-color 0.3s;
 }
 
 th.asc {
@@ -52,12 +87,48 @@ th.desc::after {
   content: "▼";
 }
 
-/* Extra styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+/* Zebra stripes for table rows */
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-h1 {
-  color: #333;
+/* Hover effect for table rows */
+tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Action links styling */
+td a {
+  text-decoration: none;
+  color: #0066cc;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+/* New Movie button styling */
+.button {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-top: 10px;
+  background-color: #0066cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #004999;
+}
+
+/* Table footer styling */
+tfoot td {
+  font-weight: bold;
+  background-color: #f7f7f7;
+  text-align: left;
+  padding: 10px;
 }
